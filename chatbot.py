@@ -1,10 +1,14 @@
+import os
+from dotenv import load_dotenv
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 
-OPEN_API_KEY = "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"
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPEN_API_KEY")
 
 #Upload PDF Files
 st.header("My First Chatbot")
@@ -33,7 +37,7 @@ if file is not None:
 
 
 #generating embeddings
-embeddings = OpenAIEmbeddings(openai_api_key=OPEN_API_KEY)
+embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 
 #creating vector store - FAISS
 vector_store = FAISS.from_texts(chunks, embeddings)
