@@ -3,12 +3,12 @@ from dotenv import load_dotenv
 import streamlit as st
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 
 load_dotenv()
 
-OPENAI_API_KEY = os.getenv("OPEN_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 #Upload PDF Files
 st.header("My First Chatbot")
@@ -36,17 +36,19 @@ if file is not None:
     #st.write(chunks)
 
 
-#generating embeddings
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+    #generating embeddings
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    vector_store = FAISS.from_texts(chunks, embeddings)
 
-#creating vector store - FAISS
-vector_store = FAISS.from_texts(chunks, embeddings)
+    #creating vector store - FAISS
+    vector_store = FAISS.from_texts(chunks, embeddings)
 
+    #get user question
+    user_question = st.text_input("Type your question here")
 
+    #do similarity search
+    if user_question:
+        match = vector_store.similarity_search(user_question)
+        st.write(match)
 
-
-
-
-
-
-
+    #output results
