@@ -1,0 +1,18 @@
+# Requirements for Chatbot PDF (recommended for Python 3.10/3.11)
+# Use pip install -r requirements.txt
+# Note: faiss-cpu can be problematic on macOS when installed via pip; consider installing via conda (see README.md).
+
+python-dotenv>=1.0,<2.0
+streamlit>=1.20,<2.0
+PyPDF2>=3.0,<4.0
+langchain>=0.0.200,<1.0
+langchain-openai>=0.0.5,<1.0
+langchain-community>=0.0.3,<1.0
+openai>=0.27.0,<1.0
+faiss-cpu>=1.7.2,<2.0  # optional; prefer conda on macOS if pip install fails
+tqdm>=4.64,<5.0
+
+# Optional (for OCR support)
+pytesseract>=0.3.10,<1.0
+Pillow>=9.0,<10.0
+
