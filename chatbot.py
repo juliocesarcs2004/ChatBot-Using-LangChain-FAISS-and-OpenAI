@@ -33,22 +33,20 @@ if file is not None:
         length_function=len
     )
     chunks = text_splitter.split_text(text)
-    #st.write(chunks)
+    st.write(chunks)
 
 
     #generating embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    vector_store = FAISS.from_texts(chunks, embeddings)
+
+
 
     #creating vector store - FAISS
-    vector_store = FAISS.from_texts(chunks, embeddings)
+
 
     #get user question
-    user_question = st.text_input("Type your question here")
+
 
     #do similarity search
-    if user_question:
-        match = vector_store.similarity_search(user_question)
-        st.write(match)
+
 
     #output results
