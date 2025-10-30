@@ -64,7 +64,7 @@ Running the app
 source .venv/bin/activate
 
 # run Streamlit
-streamlit run chatbot.py
+streamlit run Chatbot.py
 ```
 
 Usage
